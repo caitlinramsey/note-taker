@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/api/notes', function (err, res) => {
+app.get('/api/notes', (err, res) => {
     try {
         noteData = fs.readFileSync('db/db.json', 'utf8');
         console.log('Hello!');
@@ -65,18 +65,18 @@ app.delete('/api/notes/:id', function (req, res) {
     }
 });
 
-app.get('/notes', function (req, res) => {
+app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/notes.html'))
 });
 
-app.get('*', function (req, res) => {
+app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/index.html'));
 });
 
-app.get('/api/notes', function (req, res) => {
+app.get('/api/notes', (req, res) => {
     return res.sendFile(path.json(__dirname, 'db/db.json'))
 });
 
-app.listen(PORT, function () =>
+app.listen(PORT, () =>
     console.log(`App listening at http://localhost:${PORT}`)
 );
