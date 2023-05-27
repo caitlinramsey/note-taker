@@ -22,7 +22,7 @@ app.post('/api/notes', (req, res) => {
     fs.readFile('./db/db.json', 'utf8', (err, data) => {
         console.log(err);
         const noteData = JSON.parse(data);
-        req.body.id['uuid'] = uuid();
+        req.body['uuid'] = uuid();
         noteData.push(req.body);
         fs.writeFile('./db/db.json', JSON.stringify(noteData), (err) => {
             console.log(err);
