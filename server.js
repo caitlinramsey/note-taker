@@ -23,7 +23,7 @@ app.post('/api/notes', (req, res) => {
     fs.readFile('./db/db.json', 'utf8', (err, data) => {
         console.log(err);
         const noteData = JSON.parse(data);
-        req.body['uuid'] = uuid();
+        req.body['id'] = uuid();
         noteData.push(req.body);
         fs.writeFile('./db/db.json', JSON.stringify(noteData), (err) => {
             console.log(err);
@@ -33,18 +33,19 @@ app.post('/api/notes', (req, res) => {
 })
 
 app.delete('/api/notes/:id', (req, res) => {
-    noteData = fs.readFile('./db/db.json', 'utf8');
-    noteData = JSON.parse(data);
-    noteData = noteData.filter(function (note) {
-        return note.id != req.params.id;
-    });
-    noteData = JSON.stringify(noteData);
+    fs.readFile('./db/db.json', 'utf8', (err, data) => {
+        noteData = JSON.parse(data);
+        noteData = noteData.filter(function (note) {
+            return note.id != req.params.id;
+        });
+        noteData = JSON.stringify(noteData);
 
-    fs.writeFile('./db/db.json', noteData, 'utf8', function (err) {
-        if (err) throw err;
-    });
+        fs.writeFile('./db/db.json', noteData, 'utf8', function (err) {
+            if (err) throw err;
+        });
 
-    res.send(JSON.parse(noteData));
+        res.send(JSON.parse(noteData));
+        });
 })
 
 app.get('/notes', (req, res) => {
