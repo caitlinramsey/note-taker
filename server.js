@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const uuid = require('uniqid');
+const nodemon = require('nodemon');
 
 const PORT = process.env.PORT || 3001;
 
@@ -29,6 +30,21 @@ app.post('/api/notes', (req, res) => {
             res.json(req.body);
         })
     })
+})
+
+app.delete('/api/notes/:id', (req, res) => {
+    noteData = fs.readFile('./db/db.json', 'utf8');
+    noteData = JSON.parse(data);
+    noteData = noteData.filter(function (note) {
+        return note.id != req.params.id;
+    });
+    noteData = JSON.stringify(noteData);
+
+    fs.writeFile('./db/db.json', noteData, 'utf8', function (err) {
+        if (err) throw err;
+    });
+
+    res.send(JSON.parse(noteData));
 })
 
 app.get('/notes', (req, res) => {
