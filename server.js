@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/api/notes', (req, res) {
+app.get('/api/notes', (req, res) => {
     try {
         noteData = fs.readFileSync('db/db.json', 'utf8');
         console.log('Hello from the app!');
