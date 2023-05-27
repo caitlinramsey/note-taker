@@ -18,7 +18,7 @@ This application is used for creating, saving, and deleting notes. A user is abl
 - [Deployed Application](#deployed)
 
 ## Mockup
-
+![An image of the note taker app.](./Assets/11-express-homework-demo-01.png)
 
 ## Installation
 For this application, the user can install express.js in order to invoke the application from the command line.
